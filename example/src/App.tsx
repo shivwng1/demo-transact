@@ -3,6 +3,10 @@ import Vapi from '@vapi-ai/web';
 
 const VAPI_PUBLIC_KEY = import.meta.env.VITE_VAPI_PUBLIC_KEY;
 
+if (!VAPI_PUBLIC_KEY) {
+  throw new Error('PUBLIC_KEY is required. Please set it in your .env.local file.');
+}
+
 interface Message {
   time: string;
   type: 'user' | 'assistant' | 'system';
@@ -10,43 +14,6 @@ interface Message {
 }
 
 function App() {
-  // Check if VAPI_PUBLIC_KEY is available
-  if (!VAPI_PUBLIC_KEY) {
-    return (
-      <div style={{ 
-        maxWidth: '600px', 
-        margin: '50px auto', 
-        padding: '20px',
-        fontFamily: 'Arial, sans-serif',
-        textAlign: 'center',
-        backgroundColor: '#fee2e2',
-        border: '1px solid #fecaca',
-        borderRadius: '8px'
-      }}>
-        <h1 style={{ color: '#dc2626' }}>⚠️ Configuration Required</h1>
-        <p style={{ color: '#7f1d1d', lineHeight: '1.6' }}>
-          The VAPI public key is not configured. Please add the <code>VITE_VAPI_PUBLIC_KEY</code> 
-          environment variable to your deployment settings.
-        </p>
-        <div style={{ 
-          backgroundColor: '#f3f4f6', 
-          padding: '15px', 
-          borderRadius: '4px', 
-          marginTop: '20px',
-          textAlign: 'left'
-        }}>
-          <p><strong>For Vercel:</strong></p>
-          <ol style={{ paddingLeft: '20px' }}>
-            <li>Go to your project settings in Vercel dashboard</li>
-            <li>Navigate to Environment Variables</li>
-            <li>Add: <code>VITE_VAPI_PUBLIC_KEY</code> = your Vapi public key</li>
-            <li>Redeploy your application</li>
-          </ol>
-        </div>
-      </div>
-    );
-  }
-
   const [vapi] = useState(() => new Vapi(VAPI_PUBLIC_KEY));
   const [connected, setConnected] = useState(false);
   const [assistantIsSpeaking, setAssistantIsSpeaking] = useState(false);
