@@ -1,0 +1,7 @@
+{
+  "buildCommand": "npm install && npm run pack:local && cd example && npm install && npm run build",
+  "outputDirectory": "example/dist",
+  "installCommand": "npm install",
+  "devCommand": "cd example && npm run dev",
+  "framework": null
+} 
