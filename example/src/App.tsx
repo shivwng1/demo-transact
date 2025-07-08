@@ -4,7 +4,7 @@ import Vapi from '@vapi-ai/web';
 const VAPI_PUBLIC_KEY = import.meta.env.VITE_VAPI_PUBLIC_KEY;
 
 if (!VAPI_PUBLIC_KEY) {
-  throw new Error('VITE_VAPI_PUBLIC_KEY is required. Please set it in your .env.local file.');
+  throw new Error('PUBLIC_KEY is required. Please set it in your .env.local file.');
 }
 
 interface Message {
@@ -103,44 +103,8 @@ function App() {
     try {
       addMessage('system', 'Starting call...');
       
-      // Start call with assistant configuration
-      await vapi.start({
-        // Basic assistant configuration
-        model: {
-          provider: "openai",
-          model: "gpt-4o",
-          messages: [
-            {
-              role: "system",
-              content: "You are a helpful assistant. Keep your responses concise and conversational. You're speaking to someone through voice, so avoid using formatting or special characters."
-            }
-          ]
-        },
-        
-        // Voice configuration
-        voice: {
-          provider: "vapi",
-          voiceId: "Elliot"
-        },
-        
-        // Transcriber configuration
-        transcriber: {
-          provider: "deepgram",
-          model: "nova-2",
-          language: "en-US"
-        },
-        
-        // Call settings
-        firstMessage: "Hello! I'm your AI assistant. How can I help you today?",
-        endCallMessage: "Thank you for the conversation. Goodbye!",
-        endCallPhrases: ["goodbye", "bye", "end call", "hang up"],
-        
-        // Silence timeout (in seconds)
-        silenceTimeoutSeconds: 30,
-        
-        // Max call duration (in seconds) - 10 minutes
-        maxDurationSeconds: 600
-      });
+      // Start call with your existing assistant ID
+      await vapi.start('dc0da3fb-4b7e-4bd4-8778-71c934fc64a5');
       
     } catch (error) {
       console.error('Error starting call:', error);
@@ -210,7 +174,7 @@ function App() {
       padding: '20px',
       fontFamily: 'Arial, sans-serif'
     }}>
-      <h1 style={{ textAlign: 'center', color: '#333' }}>Vapi Voice Assistant</h1>
+      <h1 style={{ textAlign: 'center', color: '#333' }}>Avishkar AI Voice Demo App</h1>
       
       {/* Status Panel */}
       <div style={{
