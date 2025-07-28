@@ -104,7 +104,7 @@ function App() {
       addMessage('system', 'Starting call...');
       
       // Start call with your existing assistant ID
-      await vapi.start('dc0da3fb-4b7e-4bd4-8778-71c934fc64a5');
+      await vapi.start('ff1b3167-f41b-4b10-b180-81146b6f52cf');
       
     } catch (error) {
       console.error('Error starting call:', error);
